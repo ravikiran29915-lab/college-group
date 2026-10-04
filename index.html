@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CampusCourse – Discover Your Future. Choose Your Course.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#2563eb;--primary-d:#004ac6;--ink:#0b1c30;--body:#434655;--muted:#525f75;--bg:#f8f9ff;--soft:#e5eeff;--chip:#d6e3fe;--track:#dce9ff;--white:#fff;
+--shadow:0 1px 1px rgba(0,0,0,.05);--shadow-lg:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:Inter,sans-serif;color:var(--body);background:var(--bg);line-height:1.5}
+h1,h2,h3,h4,.brand{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink)}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+section{padding:40px 0}
+.mono{font-family:'JetBrains Mono',monospace;font-weight:500}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:16px 24px;border-radius:8px;font-weight:600;border:0;cursor:pointer;font-size:16px;font-family:inherit}
+.btn-primary{background:var(--primary);color:#fff;padding:16px 40px;box-shadow:var(--shadow-lg)}
+.btn-primary:hover{background:var(--primary-d)}
+.btn-soft{background:var(--chip);color:#0e1c2f}
+.eyebrow{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--primary-d);text-align:center}
+.sec-head{text-align:center;max-width:576px;margin:0 auto 40px}
+.sec-head h2{font-size:30px;letter-spacing:-.5px;margin:4px 0 12px}
+.card{background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:24px}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(248,249,255,.85);backdrop-filter:blur(12px);box-shadow:0 1px 8px rgba(0,0,0,.04)}
+.nav{height:80px;display:flex;align-items:center;gap:16px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;font-weight:600;font-size:18px;letter-spacing:-.45px}
+.logo{width:40px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--primary),#0b192c);display:grid;place-items:center;color:#fff;font-size:16px}
+.links{display:flex;gap:8px}
+.links a{padding:4px 16px;border-radius:8px;font-weight:600;color:var(--body)}
+.links a.active{background:var(--primary);color:#fff;font-weight:400}
+.nav-cta{display:flex;align-items:center;gap:12px}
+.nav-cta .login{color:var(--primary-d);font-weight:600}
+.nav-cta .btn{padding:6px 16px;font-size:15px}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--primary-d);color:#fff;display:grid;place-items:center;font-size:12px}
+.burger{display:none;background:none;border:0;font-size:26px;cursor:pointer;color:var(--ink)}
+
+/* hero */
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--chip);color:#0e1c2f;font-size:13px;font-weight:500;padding:4px 16px;border-radius:999px;box-shadow:var(--shadow);margin-bottom:16px}
+.badge i{width:8px;height:8px;border-radius:50%;background:var(--primary-d)}
+.hero-grid{display:grid;grid-template-columns:7fr 5fr;gap:32px;align-items:center}
+.hero-grid h1{font-size:40px;line-height:50px;letter-spacing:-1px;margin:16px 0}
+.hero-grid h1 span{color:var(--primary-d)}
+.hero-grid p.lead{max-width:672px}
+.cta{display:flex;gap:16px;margin:20px 0 8px;flex-wrap:wrap}
+.metrics{display:flex;gap:16px;padding-top:24px}
+.metric{flex:1;background:#fff;border-radius:12px;padding:16px;box-shadow:var(--shadow)}
+.metric b{display:block;font:700 22px/28px 'Plus Jakarta Sans';color:var(--primary-d);letter-spacing:-.22px}
+.metric small{font-size:12px}
+.visual{position:relative;height:460px;border-radius:16px;overflow:hidden;background:linear-gradient(160deg,#c9dbff,#e5eeff 55%,#b6ccf7);box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1)}
+.visual img{width:100%;height:100%;object-fit:cover;display:block}
+.float{position:absolute;background:rgba(255,255,255,.9);backdrop-filter:blur(6px);padding:4px 16px;border-radius:12px;font-weight:600;color:var(--ink);box-shadow:var(--shadow-lg)}
+.f1{top:16px;left:16px}.f2{bottom:16px;right:16px}
+
+/* about */
+.split{display:grid;grid-template-columns:5fr 7fr;gap:32px}
+.portrait{position:relative;min-height:480px;border-radius:16px;background:linear-gradient(160deg,#d6e3fe,#9fb9ee);align-self:end;overflow:hidden}
+.portrait img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.accred{position:absolute;left:24px;right:24px;bottom:24px;background:rgba(255,255,255,.95);border-radius:16px;padding:16px;box-shadow:var(--shadow-lg)}
+.accred div+div{margin-top:10px}.accred b{display:block;color:var(--ink);font-size:15px}.accred small{font-size:12px}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.pillars .card{padding:16px}
+.ico{width:40px;height:40px;border-radius:10px;background:var(--soft);display:grid;place-items:center;font-size:18px;margin-bottom:12px}
+.pillars h4,.grid3 h3{font-size:16px;margin-bottom:4px}
+.pillars p{font-size:14px}
+
+/* search */
+.search{background:#fff;border-radius:16px;padding:24px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;gap:16px}
+.search input{width:100%;padding:13px 16px 13px 48px;border:1px solid #c3c6d7;border-radius:8px;font:15px Inter;background:var(--bg)}
+.sbox{position:relative}.sbox::before{content:"🔍";position:absolute;left:16px;top:11px}
+.lbl{font-size:12px;font-weight:600;letter-spacing:.6px;color:var(--muted);margin-bottom:8px;text-transform:uppercase}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:0;background:var(--soft);color:var(--ink);font:600 14px Inter;padding:4px 16px;border-radius:999px;cursor:pointer}
+.chip.on{background:var(--primary);color:#fff}
+.small .chip{font-size:12px;padding:4px 8px;border-radius:6px}
+.tabrow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.tabrow .count{font-size:12px;color:var(--muted)}
+
+/* courses */
+.sec-title{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:24px;flex-wrap:wrap}
+.sec-title h2{font-size:30px;letter-spacing:-.5px}.sec-title p{max-width:448px;font-size:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.course{display:flex;flex-direction:column;justify-content:space-between;gap:16px}
+.course .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.code{background:var(--soft);color:var(--primary-d);font-size:12px;padding:4px 8px;border-radius:4px}
+.tag{background:var(--chip);color:#0e1c2f;font-size:11px;font-weight:600;letter-spacing:.33px;padding:4px 8px;border-radius:999px}
+.course h3{font-size:18px;font-weight:600;margin-top:4px}
+.course .meta{font-size:12px;color:var(--muted);margin:4px 0}
+.course p.d{font-size:14px;margin-top:4px}
+.seats{display:flex;justify-content:space-between;font-size:11px;font-weight:600;letter-spacing:.33px;margin-bottom:6px}
+.seats .l{color:var(--primary-d);display:flex;align-items:center;gap:4px}.seats .l i{width:8px;height:8px;border-radius:50%;background:var(--primary-d)}
+.bar{height:6px;border-radius:999px;background:var(--track);overflow:hidden;margin-bottom:16px}.bar span{display:block;height:100%;background:var(--primary-d);border-radius:999px}
+.vd{width:100%;justify-content:center;background:var(--soft);color:var(--primary-d);padding:4px;box-shadow:var(--shadow)}
+.vd:hover{background:var(--primary);color:#fff}
+.empty{grid-column:1/-1;text-align:center;padding:40px}
+
+/* departments */
+.dept .ico{width:48px;height:48px;font-size:22px}
+.dept h3{font-size:18px;margin-bottom:4px}
+.dept .lead{font-size:14px;color:var(--muted);margin-bottom:8px}
+.dept .foot{display:flex;justify-content:space-between;margin-top:20px;font-size:14px}
+.dept .foot a{color:var(--primary-d);font-weight:600}
+.wide{grid-column:span 2}
+.wide .in{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+.cta-box{background:var(--soft);border-radius:12px;padding:20px;text-align:right}
+.cta-box small{display:block;font-size:12px}.cta-box b{display:block;font:700 22px 'Plus Jakarta Sans';color:var(--ink);margin:6px 0}
+.cta-box .btn{padding:4px 16px;margin-top:10px;font-size:15px}
+
+/* why */
+.why .card h3{font-size:18px}.why .card p{font-size:14px}
+.ticks{display:flex;gap:28px;flex-wrap:wrap;margin-top:16px;font-size:14px;font-weight:600;color:var(--primary-d)}
+
+/* stats */
+.stats{background:var(--ink);color:#fff;padding:40px 0}
+.stats .wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;text-align:center}
+.stats b{display:block;font:700 40px/48px 'Plus Jakarta Sans';color:#fff}
+.stats span{display:block;font-weight:600}.stats small{opacity:.7}
+
+/* testimonials */
+.stars{color:#f5a524;letter-spacing:4px;margin-bottom:12px}
+.quote{font-size:14px;margin-bottom:20px}
+.who{display:flex;align-items:center;gap:16px}
+.who .avatar{width:48px;height:48px;font-size:16px}
+.who b{display:block;color:var(--ink)}.who small{font-size:12px}
+
+/* contact */
+.contact{display:grid;grid-template-columns:5fr 7fr;gap:32px}
+.info li{list-style:none;display:flex;gap:12px;margin-top:16px;font-size:14px}
+.info b{display:block;color:var(--ink);font-size:15px}
+.map{margin-top:16px;height:224px;border-radius:16px;background:repeating-linear-gradient(45deg,#e5eeff,#e5eeff 12px,#d6e3fe 12px,#d6e3fe 24px);display:grid;place-items:center;font-weight:600;color:var(--primary-d)}
+form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+label{display:block;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
+input,select,textarea{width:100%;padding:12px 16px;border:1px solid #c3c6d7;border-radius:8px;background:var(--bg);font:15px Inter;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--primary);border-color:transparent}
+textarea{min-height:112px;resize:vertical}
+.ok{display:none;margin-top:16px;padding:12px 16px;background:#dcfce7;color:#166534;border-radius:8px;font-weight:600}
+
+/* footer */
+footer{background:var(--ink);color:#c3c9d6;padding:40px 0 0;margin-top:40px}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
+footer h5{font:600 12px Inter;letter-spacing:1.2px;color:#fff;margin-bottom:12px}
+footer li{list-style:none;font-size:14px;margin-bottom:8px}footer li a:hover{color:#fff}
+footer .brand{color:#fff;margin-bottom:12px}
+.pills span{display:inline-block;background:rgba(255,255,255,.1);padding:4px 8px;border-radius:6px;font-size:12px;margin:12px 8px 0 0}
+.copy{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.12);margin-top:32px;padding:24px 0;font-size:12px}
+#top{position:fixed;right:32px;bottom:32px;width:48px;height:48px;border-radius:50%;background:var(--primary);color:#fff;border:0;font-size:18px;cursor:pointer;box-shadow:var(--shadow-lg);display:none}
+
+@media(max-width:1000px){
+ .links,.nav-cta .login{display:none}.burger{display:block}
+ .links.open{display:flex;flex-direction:column;position:absolute;top:80px;left:0;right:0;background:var(--bg);padding:16px 32px;box-shadow:0 8px 16px rgba(0,0,0,.08)}
+ .hero-grid,.split,.contact{grid-template-columns:1fr}.visual{height:320px}.portrait{min-height:420px}
+ .grid3{grid-template-columns:1fr 1fr}.wide{grid-column:span 2}.stats .wrap{grid-template-columns:repeat(2,1fr)}.fgrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+ .wrap{padding:0 16px}.grid3,.pillars,form .row,.wide .in{grid-template-columns:1fr}.wide{grid-column:auto}
+ .metrics{flex-direction:column}.hero-grid h1{font-size:32px;line-height:40px}.fgrid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="wrap nav">
+  <a href="#home" class="brand"><span class="logo">🎓</span>CampusCourse</a>
+  <nav class="links" id="links">
+   <a href="#home" class="active">Home</a><a href="#about">About</a><a href="#courses">Courses</a>
+   <a href="#departments">Departments</a><a href="#why">Why Choose Us</a><a href="#contact">Contact</a>
+  </nav>
+  <div class="nav-cta">
+   <a href="#" class="login">Login</a>
+   <a href="#courses" class="btn btn-primary">Explore Catalog</a>
+   <span class="avatar">👤</span>
+   <button class="burger" id="burger" aria-label="Menu">☰</button>
+  </div>
+ </div>
+</header>
+
+<main id="home">
+<!-- HERO -->
+<section>
+ <div class="wrap">
+  <span class="badge"><i></i>Accredited Academic Session 2025–26 Open • Priority Admissions</span>
+  <div class="hero-grid">
+   <div>
+    <div class="eyebrow mono" style="text-align:left">▮▮ Institutional Course &amp; Degree Registry</div>
+    <h1>Discover Your Future.<br><span>Choose Your Course.</span></h1>
+    <p class="lead">Explore transparent curriculum roadmaps, track real-time laboratory seat capacities, and enroll in state-accredited degree pathways engineered for tomorrow's technological and commercial leadership.</p>
+    <div class="cta">
+     <a href="#courses" class="btn btn-primary">Explore Courses →</a>
+     <a href="#about" class="btn btn-soft">Learn More →</a>
+    </div>
+    <div class="metrics">
+     <div class="metric"><b>120+</b><small>Degree Specializations</small></div>
+     <div class="metric"><b>96%</b><small>Placement Rate</small></div>
+     <div class="metric"><b>NAAC A++</b><small>Top-Tier Accreditation</small></div>
+    </div>
+   </div>
+   <div class="visual">
+    <!-- Replace with your exported campus image: <img src="assets/campus.jpg" alt="Campus courtyard"> -->
+    <div class="float f1">⭐ 4.9/5 Student Rating</div>
+    <div class="float f2">🏛️ 100% Industry Aligned</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+ <div class="wrap">
+  <div class="sec-head">
+   <div class="eyebrow mono">About CampusCourse</div>
+   <h2>Where Academic Rigor Meets Real-World Impact</h2>
+   <p>Rooted in research, driven by industry, and designed around every student's ambition.</p>
+  </div>
+  <div class="split">
+   <div class="portrait">
+    <!-- <img src="assets/student.jpg" alt="Student portrait"> -->
+    <div class="accred">
+     <div><b>NAAC A++ Accredited</b><small>Highest grade of national assessment</small></div>
+     <div><b>State-Recognized Degree Programs</b><small>Fully approved curricula &amp; examination boards</small></div>
+    </div>
+   </div>
+   <div>
+    <div class="card">
+     <div class="eyebrow mono" style="text-align:left">Our Philosophy</div>
+     <h3 style="font-size:20px;margin:6px 0 10px">Cultivating Intellectual Velocity in an Interconnected World</h3>
+     <p style="font-size:14px">Founded on the belief that higher education must bridge scholarly depth with tangible societal progress, CampusCourse orchestrates forward-looking degree tracks. Our modular degree plans afford undergraduates hands-on access to live algorithmic clusters, financial trading floors, and executive leadership seminars.</p>
+    </div>
+    <div class="pillars">
+     <div class="card"><div class="ico">🧩</div><h4>Interdisciplinary Curriculum</h4><p>Synthesize computer science with quantitative economics, human factors, or enterprise logic seamlessly.</p></div>
+     <div class="card"><div class="ico">🧪</div><h4>Global Research Labs</h4><p>State-subsidized computing and laboratory clusters open 24/7 for undergraduate thesis development.</p></div>
+     <div class="card"><div class="ico">🎓</div><h4>Dual-Major Pathways</h4><p>Structured pathways enabling combined Honors credentials within an accelerated four-year window.</p></div>
+     <div class="card"><div class="ico">🤝</div><h4>Industry Mentor Integration</h4><p>Direct sprint reviews, capstone evaluations, and 1-on-1 career coaching with Fortune 500 engineering heads.</p></div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- SEARCH + COURSES -->
+<section id="courses">
+ <div class="wrap">
+  <div class="search">
+   <div class="sbox"><input id="q" type="search" placeholder="Search by course name or keyword, e.g., Computer Science, Data Science, Finance, Calculus..."></div>
+   <div><div class="lbl">Department:</div><div class="chips" id="deptChips"></div></div>
+   <div class="tabrow small">
+    <div class="chips" id="lvlChips"><span class="lbl" style="margin:0 4px 0 0;align-self:center">Level</span></div>
+    <div class="count" id="count"></div>
+   </div>
+  </div>
+ </div>
+</section>
+<section style="padding-top:0">
+ <div class="wrap">
+  <div class="sec-title">
+   <div><div class="eyebrow mono" style="text-align:left">Course Catalog</div><h2>Available Degree Programs</h2></div>
+   <p>Compare programs, check live seat availability, and shortlist the pathway that fits your goals.</p>
+  </div>
+  <div class="grid3" id="courseGrid"></div>
+ </div>
+</section>
+
+<!-- DEPARTMENTS -->
+<section id="departments">
+ <div class="wrap">
+  <div class="sec-head">
+   <div class="eyebrow mono">Faculties</div>
+   <h2>Academic Divisions &amp; Departments</h2>
+   <p>Five world-class divisions, each led by internationally recognized scholars and practitioners.</p>
+  </div>
+  <div class="grid3">
+   <div class="card dept"><div class="ico">💻</div><h3>Computer Science &amp; AI</h3><div class="lead">Faculty Lead: Prof. David Vance, Ph.D. (MIT)</div><p style="font-size:14px">Pioneering artificial intelligence systems, computer vision algorithms, and secure compiler architectures across 6 state-of-the-art software clusters.</p><div class="foot"><span>6 Programs</span><a href="#courses">Explore →</a></div></div>
+   <div class="card dept"><div class="ico">💹</div><h3>Commerce &amp; Financial Studies</h3><div class="lead">Faculty Lead: Dr. Aris Thorne, CFA</div><p style="font-size:14px">Equipping future corporate auditors, investment analysts, and fiscal controllers with live international exchange terminals and behavioral finance models.</p><div class="foot"><span>5 Programs</span><a href="#courses">Explore →</a></div></div>
+   <div class="card dept"><div class="ico">📊</div><h3>Management &amp; Business Admin</h3><div class="lead">Faculty Lead: Prof. Miriam Al-Sabah, D.B.A.</div><p style="font-size:14px">Fostering decisive leadership, international market negotiation, lean venture prototyping, and algorithmic human capital operations.</p><div class="foot"><span>4 Programs</span><a href="#courses">Explore →</a></div></div>
+   <div class="card dept"><div class="ico">∑</div><h3>Mathematical Sciences &amp; Stats</h3><div class="lead">Faculty Lead: Dr. Sterling Zhang, Ph.D.</div><p style="font-size:14px">Investigating computational topology, post-quantum cryptosystems, and high-frequency stochastic systems with global research consortiums.</p><div class="foot"><span>3 Programs</span><a href="#courses">Explore →</a></div></div>
+   <div class="card dept wide"><div class="in">
+    <div><div class="ico" style="width:48px;height:48px;font-size:22px">🧠</div><h3>Data Science &amp; Advanced Computing</h3><div class="lead">Faculty Lead: Prof. Elena Vasquez, Ph.D.</div><p style="font-size:14px">Synthesizing statistical theory with Petabyte-scale cloud infrastructure to solve automated biomedical diagnostics and planetary sensor processing.</p></div>
+    <div class="cta-box"><small>Featured Division</small><b>Data Science &amp; Advanced Computing</b><small>Admissions open for the 2025–26 session</small><a href="#contact" class="btn btn-primary">Request Syllabus →</a></div>
+   </div></div>
+  </div>
+ </div>
+</section>
+
+<!-- WHY -->
+<section id="why" class="why">
+ <div class="wrap">
+  <div class="sec-head">
+   <div class="eyebrow mono">The CampusCourse Edge</div>
+   <h2>Why Choose CampusCourse?</h2>
+   <p>Five commitments that turn a degree into a career-launching experience.</p>
+  </div>
+  <div class="grid3">
+   <div class="card"><div class="ico">👩‍🏫</div><h3>1. Experienced Faculty</h3><p>Over 85% of our faculty hold doctorates from world-leading institutions. They are active industry consultants, patent holders, and authors who prioritize 1-on-1 intellectual mentorship.</p></div>
+   <div class="card"><div class="ico">🔬</div><h3>2. Modern Laboratories</h3><p>Experience our High-Performance Computing (HPC) GPU clusters, autonomous robotics workstations, digital media design studios, and industrial IoT micro-fab hubs.</p></div>
+   <div class="card"><div class="ico">💼</div><h3>3. Placement Opportunities</h3><p>Boasting a 96% verified campus recruitment track record with top-tier technology conglomerates, investment banking leaders, and national research institutes.</p></div>
+   <div class="card"><div class="ico">🚀</div><h3>4. Career Guidance &amp; Incubation</h3><p>Full-time counseling cells offering mock technical interviews, algorithmic portfolio audits, resume workshops, and institutional pre-seed capital for student ventures.</p></div>
+   <div class="card wide"><div class="ico">🌍</div><h3>5. Holistic Student Development</h3><p>Education transcends lecture halls. CampusCourse organizes annual global hackathons, academic debate societies, championship sports complexes, and exchange programs with over 40 partner universities in Europe, Asia, and the Americas.</p>
+    <div class="ticks"><span>✔ Global Hackathons</span><span>✔ Championship Sports</span><span>✔ 40+ Exchange Partners</span></div></div>
+  </div>
+ </div>
+</section>
+
+<!-- STATS -->
+<div class="stats"><div class="wrap">
+ <div><b>120+</b><span>Specializations</span><small>Across 5 divisions</small></div>
+ <div><b>96%</b><span>Placement Rate</span><small>Verified recruitment</small></div>
+ <div><b>85%</b><span>Doctorate Faculty</span><small>Top global institutions</small></div>
+ <div><b>40+</b><span>Partner Universities</span><small>Europe, Asia, Americas</small></div>
+ <div><b>24/7</b><span>Lab Access</span><small>Open computing clusters</small></div>
+</div></div>
+
+<!-- TESTIMONIALS -->
+<section>
+ <div class="wrap">
+  <div class="sec-head">
+   <div class="eyebrow mono">Testimonials</div>
+   <h2>Voices of Our Scholars</h2>
+   <p>Hear directly from students who turned their coursework into careers.</p>
+  </div>
+  <div class="grid3">
+   <div class="card"><div class="stars">★★★★★</div><p class="quote">“The sheer clarity of the syllabus roadmap and elective flexibility allowed me to pair Computer Science with Machine Learning electives smoothly. My faculty mentors directly referred me to the robotics research lab, landing me an AI engineering role before final exams.”</p><div class="who"><span class="avatar">ML</span><div><b>Maya Lin</b><small>B.Sc Computer Science, Class of 2025</small></div></div></div>
+   <div class="card"><div class="stars">★★★★★</div><p class="quote">“The high-performance GPU clusters and real-world telemetry datasets we analyzed in our junior year felt like working directly in an enterprise software environment. The faculty aren't just teachers; they are active researchers who push you to think rigorously.”</p><div class="who"><span class="avatar">MV</span><div><b>Marcus Vance</b><small>B.Sc Data Science, Class of 2024</small></div></div></div>
+   <div class="card"><div class="stars">★★★★★</div><p class="quote">“The dual-track BBA and B.Com program gave me an unmatched competitive edge during international investment banking interviews. The Career Guidance Cell ran six mock interview simulations that prepared me for every case scenario.”</p><div class="who"><span class="avatar">ER</span><div><b>Elena Rostova</b><small>BBA &amp; B.Com Dual Track, Class of 2025</small></div></div></div>
+  </div>
+ </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+ <div class="wrap">
+  <div class="sec-head">
+   <div class="eyebrow mono">Get in Touch</div>
+   <h2>Connect With Our Admissions Desk</h2>
+   <p>Have questions about eligibility, fees, or scholarships? Our counselors respond within one working day.</p>
+  </div>
+  <div class="contact">
+   <div>
+    <div class="card info">
+     <h3 style="font-size:18px">Contact Information</h3>
+     <ul>
+      <li>📍<div><b>Campus Address</b>123 University Avenue, Academic District, Your City, 000000</div></li>
+      <li>📞<div><b>Admissions Hotline</b>+1 (555) 019-2834</div></li>
+      <li>✉️<div><b>Email Us</b>admissions@campuscourse.edu</div></li>
+      <li>🕘<div><b>Office Hours</b>Mon–Sat, 9:00 AM – 5:00 PM</div></li>
+     </ul>
+    </div>
+    <div class="map">Interactive Map Placeholder</div>
+   </div>
+   <div class="card">
+    <h3 style="font-size:18px">Submit an Academic Inquiry</h3>
+    <p style="font-size:14px;margin:4px 0 20px">Complete the form below to receive a personalized curriculum syllabus, fee breakdown, and scholarship criteria.</p>
+    <form id="form" novalidate>
+     <div class="row"><div><label for="n">Full Name *</label><input id="n" required placeholder="e.g. Alexander Chen"></div>
+      <div><label for="e">Email Address *</label><input id="e" type="email" required placeholder="alex.chen@example.com"></div></div>
+     <div class="row"><div><label for="p">Phone Number</label><input id="p" type="tel" placeholder="+1 (555) 019-2834"></div>
+      <div><label for="c">Interested Course *</label><select id="c" required><option value="">Select a Degree Track</option></select></div></div>
+     <div style="margin-bottom:20px"><label for="m">Your Academic Goals / Message</label><textarea id="m" placeholder="Mention your previous academic qualifications, desired specialization, or questions regarding financial aid..."></textarea></div>
+     <button class="btn btn-primary" type="submit">Request Information →</button>
+     <div class="ok" id="ok">Thank you! Our admissions team will contact you shortly.</div>
+    </form>
+   </div>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="wrap">
+  <div class="fgrid">
+   <div><div class="brand"><span class="logo">🎓</span>CampusCourse</div><p style="font-size:14px;max-width:384px">Empowering the next generation of scholars, engineers, and leaders through transparent, industry-aligned higher education.</p><div class="pills"><span>NAAC A++</span><span>State Accredited</span></div></div>
+   <div><h5>CURRICULUM</h5><ul><li><a href="#courses">Course Catalog</a></li><li><a href="#departments">Academic Divisions</a></li><li><a href="#">Semester Schedules</a></li><li><a href="#">Prerequisite Index</a></li></ul></div>
+   <div><h5>ADMISSIONS &amp; AID</h5><ul><li><a href="#">Degree Planning</a></li><li><a href="#">Tuition &amp; Fees</a></li><li><a href="#">Transfer Credits</a></li><li><a href="#">Academic Calendar</a></li></ul></div>
+   <div><h5>UNIVERSITY SUPPORT</h5><ul><li><a href="#">Registrar Desk</a></li><li><a href="#">IT Help Center</a></li><li><a href="#">Accessibility (ADA)</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+  </div>
+  <div class="copy"><span>© 2025 CampusCourse. All rights reserved.</span><span>Terms of Use &nbsp;•&nbsp; Cookie Preferences</span></div>
+ </div>
+</footer>
+<button id="top" aria-label="Back to top">↑</button>
+
+<script>
+// ---- Data (edit freely) ----
+const COURSES = [
+ {code:"CS-101", name:"B.Sc Computer Science", meta:"Faculty of Computing & AI • 3 Years (6 Semesters)", dept:"Computer Science", level:"UG", cap:60, filled:76, desc:"Rigorous foundation spanning distributed computing, algorithmic complexity, neural structures, cloud architectures, and modern systems engineering."},
+ {code:"BCA-102", name:"BCA", meta:"School of Computing • 3 Years (6 Semesters)", dept:"Computer Science", level:"UG", cap:60, filled:84, desc:"Application-centric paradigm focused on enterprise full-stack development, mobile operating systems, database scaling, and agile digital product creation."},
+ {code:"COM-103", name:"B.Com", meta:"School of Commerce & Finance • 3 Years (6 Semesters)", dept:"Commerce", level:"UG", cap:60, filled:72, desc:"Advanced corporate finance, global accounting standards, international taxation, forensic auditing, and capital market valuation instruments."},
+ {code:"BBA-104", name:"BBA", meta:"Dept. of Management Studies • 3 Years (6 Semesters)", dept:"Management", level:"UG", cap:60, filled:81, desc:"Strategic enterprise governance, venture creation, customer behavior modeling, marketing operations, and multinational organizational development."},
+ {code:"DS-105", name:"B.Sc Data Science", meta:"School of Computing & Mathematics • 3 Years / 4 Years Honors", dept:"Data Science", level:"UG", cap:60, filled:86, desc:"Predictive modelling, large-scale statistical pipelines, deep neural architectures, Bayesian inference, and high-volume data telemetry."},
+ {code:"MA-106", name:"B.Sc Mathematics", meta:"Dept. of Mathematical Sciences • 3 Years (6 Semesters)", dept:"Mathematics", level:"UG", cap:60, filled:64, desc:"Theoretical purity coupled with applied computational tools: stochastic calculus, cryptography, topological analysis, and differential dynamics."}
+];
+const DEPTS = ["All Departments","Computer Science","Commerce","Management","Mathematics","Data Science"];
+const LEVELS = ["All Levels","UG","PG","PhD","Diploma","Cert"];
+let dept = DEPTS[0], level = LEVELS[0], q = "";
+
+const $ = id => document.getElementById(id);
+function chips(el, list, getCur, set){
+  list.forEach(t => {
+    const b = document.createElement("button");
+    b.className = "chip"; b.textContent = t; b.type = "button";
+    b.onclick = () => { set(t); [...el.querySelectorAll(".chip")].forEach(x => x.classList.toggle("on", x.textContent === t)); render(); };
+    if (t === getCur()) b.classList.add("on");
+    el.appendChild(b);
+  });
+}
+chips($("deptChips"), DEPTS, () => dept, v => dept = v);
+chips($("lvlChips"), LEVELS, () => level, v => level = v);
+$("q").addEventListener("input", e => { q = e.target.value.trim().toLowerCase(); render(); });
+
+function render(){
+  const list = COURSES.filter(c =>
+    (dept === DEPTS[0] || c.dept === dept) &&
+    (level === LEVELS[0] || c.level === level) &&
+    (!q || (c.name + c.desc + c.meta + c.dept + c.code).toLowerCase().includes(q)));
+  $("count").textContent = `Showing ${list.length} of 120+ programs`;
+  $("courseGrid").innerHTML = list.length ? list.map(c => {
+    const left = Math.round(c.cap * (100 - c.filled) / 100);
+    return `<article class="card course"><div>
+      <div class="top"><span class="code mono">${c.code}</span><span class="tag">${c.level === "UG" ? "Undergraduate" : c.level}</span></div>
+      <h3>${c.name}</h3><div class="meta">${c.meta}</div><p class="d">${c.desc}</p></div>
+      <div><div class="seats"><span class="l"><i></i>${left} Seats Remaining</span><span>Capacity: ${c.cap}</span></div>
+      <div class="bar"><span style="width:${c.filled}%"></span></div>
+      <a href="#contact" class="btn vd" data-course="${c.name}">View Details →</a></div></article>`;
+  }).join("") : `<div class="card empty">No programs match your search. Try a different keyword or filter.</div>`;
+}
+render();
+
+// course dropdown + "View Details" prefill
+COURSES.forEach(c => $("c").add(new Option(c.name, c.name)));
+$("courseGrid").addEventListener("click", e => { const a = e.target.closest("[data-course]"); if (a) $("c").value = a.dataset.course; });
+
+// form
+$("form").addEventListener("submit", e => {
+  e.preventDefault();
+  const ok = $("n").value.trim() && /\S+@\S+\.\S+/.test($("e").value) && $("c").value;
+  if (!ok) { alert("Please fill in your name, a valid email, and choose a course."); return; }
+  // TODO: send to your backend here (fetch('/api/inquiry', {method:'POST', body: ...}))
+  $("ok").style.display = "block"; e.target.reset();
+});
+
+// mobile menu + back to top
+$("burger").onclick = () => $("links").classList.toggle("open");
+document.querySelectorAll("#links a").forEach(a => a.addEventListener("click", () => $("links").classList.remove("open")));
+const top = $("top");
+addEventListener("scroll", () => top.style.display = scrollY > 600 ? "block" : "none");
+top.onclick = () => scrollTo({top:0, behavior:"smooth"});
+</script>
+</body>
+</html>
